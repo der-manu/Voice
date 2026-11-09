@@ -16,6 +16,10 @@ import voice.core.data.isAudioFile
 import voice.core.data.repo.ChapterRepo
 import voice.core.data.repo.getOrPut
 import voice.core.documentfile.CachedDocumentFile
+import voice.core.data.BookId
+import voice.core.data.ChapterOrder
+import voice.core.data.repo.CustomMetadataRepo
+import voice.core.scanner.order.applyChapterOrder
 
 internal data class ChapterParseResult(
   val chapters: List<Chapter>,
@@ -26,17 +30,27 @@ internal data class ChapterParseResult(
 internal class ChapterParser(
   private val chapterRepo: ChapterRepo,
   private val mediaAnalyzer: MediaAnalyzer,
+  private val customMetadataRepo: CustomMetadataRepo,
 ) {
 
   // shared by the books scanned at once, since media3 doesn't read more files at once anyway
   private val parallelAnalyses = Semaphore(MetadataRetriever.DEFAULT_MAXIMUM_PARALLEL_RETRIEVALS)
 
+  
   suspend fun parse(documentFile: CachedDocumentFile): ChapterParseResult = coroutineScope {
     val analyzedMetadata = ConcurrentHashMap<ChapterId, Metadata>()
 
+    val order = customMetadataRepo.get(BookId(documentFile.uri)).chapterOrder
+    val filesInOrder =
+      applyChapterOrder(
+        files = documentFile.audioFilesInOrder(),
+        magic = order.magic,
+        reversed = order.reversed,
+        fileName = { it.name.orEmpty() },
+      )
+
     val chapters =
-      documentFile
-        .audioFilesInOrder()
+      filesInOrder
         .map { file ->
           async {
             parallelAnalyses.withPermit {
