@@ -12,6 +12,7 @@ import voice.core.data.BookId
 import voice.core.data.Bookmark
 import voice.core.data.ChapterId
 import voice.core.data.MarkData
+import voice.core.data.ChapterOrder
 
 internal class Converters {
 
@@ -68,4 +69,8 @@ internal class Converters {
   @TypeConverter fun toBookmarkId(value: String): Bookmark.Id = Bookmark.Id(Uuid.parse(value))
 
   @TypeConverter fun fromBookmarkId(id: Bookmark.Id): String = id.value.toString()
+
+  @TypeConverter fun fromChapterOrder(order: ChapterOrder): String = order.name
+
+  @TypeConverter fun toChapterOrder(value: String): ChapterOrder = ChapterOrder.valueOf(value)
 }

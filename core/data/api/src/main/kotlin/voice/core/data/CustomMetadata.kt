@@ -14,6 +14,7 @@ public data class CustomMetadata(
   val series: String? = null,
   val part: String? = null,
   @ColumnInfo(defaultValue = "0") val hidden: Boolean = false,
+  @ColumnInfo(defaultValue = "Natural") val chapterOrder: ChapterOrder = ChapterOrder.Natural,
 ) {
 
   public fun followingFiles(metadata: BookMetadata): CustomMetadata {

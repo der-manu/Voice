@@ -47,6 +47,7 @@ import voice.core.data.repo.internals.migrations.Migration66
       AutoMigration(from = 66, to = 67, spec = Migration66::class),
       AutoMigration(from = 68, to = 69),
       AutoMigration(from = 69, to = 70),
+      AutoMigration(from = 70, to = 71),
     ],
 )
 @TypeConverters(Converters::class)
@@ -67,7 +68,7 @@ public abstract class AppDb : RoomDatabase() {
   public abstract fun listeningSessionDao(): ListeningSessionDao
 
   internal companion object {
-    const val VERSION = 70
+    const val VERSION = 71
     const val DATABASE_NAME = "autoBookDB"
 
     // the last app with an older database shipped in September 2022
