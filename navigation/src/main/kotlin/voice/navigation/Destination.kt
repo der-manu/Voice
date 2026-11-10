@@ -37,6 +37,11 @@ sealed interface Destination {
     override val trackingName: String
       get() = "CoverFromInternet"
   }
+  
+  data class ChapterOrder(val bookId: BookId) : Compose {
+    override val trackingName: String
+      get() = "ChapterOrder"
+  }
 
   data class Website(val url: String) : Destination
 

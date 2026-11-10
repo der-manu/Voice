@@ -91,6 +91,7 @@ private val EditItems =
     BottomSheetItem.StopDownload,
     BottomSheetItem.RetryDownload,
     BottomSheetItem.RemoveDownload,
+    BottomSheetItem.ChapterOrder,
     BottomSheetItem.Edit,
     BottomSheetItem.InternetCover,
     BottomSheetItem.FileCover,
@@ -471,6 +472,7 @@ internal class ActionStyle(
 internal fun BottomSheetItem.style(): ActionStyle {
   val colors = MaterialTheme.colorScheme
   return when (this) {
+    BottomSheetItem.ChapterOrder,
     BottomSheetItem.Edit ->
       ActionStyle(MaterialShapes.Pentagon, colors.secondaryContainer, colors.onSecondaryContainer)
     BottomSheetItem.InternetCover ->

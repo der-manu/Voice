@@ -41,6 +41,7 @@ enum class BottomSheetItem(
   @DrawableRes val icon: Int,
 ) {
   Edit(StringsR.string.common_action_edit, UiR.drawable.ic_edit),
+  ChapterOrder(StringsR.string.book_chapter_order, UiR.drawable.ic_sort),
   InternetCover(StringsR.string.book_edit_cover_internet, UiR.drawable.ic_image_search),
   FileCover(StringsR.string.book_edit_cover_file, UiR.drawable.ic_image),
   Hide(StringsR.string.book_hide, UiR.drawable.ic_visibility_off),

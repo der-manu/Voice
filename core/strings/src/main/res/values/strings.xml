@@ -914,4 +914,6 @@
     <string name="widget.shelf.title">Continue listening</string>
     <!-- Shown on the Now playing widget while the sleep timer runs, with the clock time playback stops, like "Stops at 23:10". -->
     <string name="widget.sleep_timer.stops_at">Stops at %1$s</string>
+    <!-- Action in the book menu that opens a dialog to change the play order of the book's files. -->
+    <string name="book_chapter_order">Chapter order…</string>
 </resources>
